@@ -4,13 +4,13 @@
 // var content = $('.content').html();
 // $('.content').html(content.replace(pattern, template));
 
-var words = ["mutational", "text", "modern", "science", "blind", "in", "the", "first", "place", "focus", "beyond", "logical", "systems", "logical", "crisis", "going", "viral", "a", "vice",
-	"a", "critical", "potential", "rethink", "concept", "of", "life"
-];
+var words = ["mutational", "text", "modern", "science", "blind", "in", "the", "first", "place", "focus", "beyond", "logical", "systems", "logical", "crisis", "going", "viral", "a", "vice", "a", "critical", "potential", "rethink", "concept", "of", "life"];
 
-var wordSearchIndex = 0;
+var MutationActive = false;
 
-function MutateText(divClass, wordList) {
+var wordSearchIndex = words.length - 1;
+
+function PrepText(divClass, wordList) {
 
 	// specify a class within which to search for words
 	var e = document.getElementsByClassName(divClass);
@@ -22,71 +22,118 @@ function MutateText(divClass, wordList) {
 
 	// remove and apply special class for specified words
 	var spans = document.getElementsByClassName("blackout");
-	for (var i = 0; i < spans.length; i++) {
+	// better to move backward thru array bc i'll be removing classes
+	for (var i = spans.length - 1; i >= 0; i--) {
 		console.log("looking for " + words[wordSearchIndex] + " in " + spans[i].innerHTML);
 		var n = spans[i].innerHTML.search(words[wordSearchIndex]);
 
 		// if we found a match
-		if (n > -1) {
+		if (n > -1 && wordSearchIndex >= 0) {
 
 			console.log("found match for " + words[wordSearchIndex]);
 
+			// add mutated class
 			var output = spans[i].innerHTML;
-			var replaced = "<span class='mutated'>" + words[wordSearchIndex] + "</span>";
+			var replaced = "</span><span class='mutated'>" + words[wordSearchIndex] + "</span><span class='blackout'>";
 
 			output = output.replace(words[wordSearchIndex], replaced);
 
-			//var output = spans[i].innerHTML.substring(0, n) + "test" + spans[i].innerHTML.substring(n);
-
 			spans[i].innerHTML = output;
-			wordSearchIndex++;
+
+			// remove blackout class
+			// spans[i].classList.remove("blackout");
+			console.log(spans[i].classList);
+
+			wordSearchIndex--;
 		}
-
-
-		// if (new RegExp(words.join("|")).test(spans[i].innerHTML)) {
-		// 	spans[i].classList.add("mutated");
-		// 	spans[i].classList.remove("blackout");
-		// 	// spans[i].innerHTML = "UPDATED!";
-		// }
-
 	};
 }
 
+function FlipText() {
+	MutationActive = !MutationActive;
 
-// check mouse location
-let isMouseHover = false;
-let images = document.getElementsByClassName("image");
+	if (MutationActive)
+		ActivateText();
+	else
+		DeactivateText();
 
-for (i = 0; i < images.length; i++) {
-	images[i].addEventListener("mouseleave", function(event) {
-		isMouseHover = false;
+}
 
+function ActivateText() {
+	var blackouts = document.getElementsByClassName("blackout");
+	for (var i = 0; i < blackouts.length; i++) {
+		blackouts[i].classList.add("blackout-active");
+	}
 
-	}, false);
-	images[i].addEventListener("mouseover", function(event) {
-		isMouseHover = true;
-		MutateText("content", words);
+	var mutations = document.getElementsByClassName("mutated");
+	for (var i = 0; i < blackouts.length; i++) {
+		mutations[i].classList.add("mutated-active");
+	}
+}
 
-	}, false);
+function DeactivateText() {
+	var blackouts = document.getElementsByClassName("blackout");
+	for (var i = 0; i < blackouts.length; i++) {
+		blackouts[i].classList.remove("blackout-active");
+	}
+
+	var mutations = document.getElementsByClassName("mutated");
+	for (var i = 0; i < blackouts.length; i++) {
+		mutations[i].classList.remove("mutated-active");
+	}
+}
+
+function AddLink() {
+	var spans = document.getElementsByClassName("blackout");
+	for (var i = 0; i < spans.length; i++) {
+
+		var n = spans[i].innerHTML.search("transcend");
+
+		// if we found a match
+		if (n > -1) {
+
+			// link
+			var output = spans[i].innerHTML;
+			output = output.replace("transcend", '<a id="myLink" href="#" onclick="ActivateText();return false;">transcend</a>');
+			spans[i].innerHTML = output;
+		}
+	}
+}
+
+// add event listeners
+// so that when you click on content divs it switches effect on/off
+var elems = document.getElementsByClassName("content");
+for (var i = 0; i < elems.length; i++) {
+	elems[i].addEventListener("click", FlipText);
+
 }
 
 
+PrepText("content", words);
+// ActivateText();
+// AddLink();
 
-
-// MutateText("content", words);
 
 var styles = `
-@keyframes example {
-   from {background-color: inherit;}
-   to {background-color: black;}
- }
 .blackout {
-  background-color:#000;
-  animation-name: example;
-  animation-duration: 4s;
+  background-color: rgba(255,255,255,1);
+  transition: 3s;
+}
+.blackout-active {
+ background-color: rgba(0,0,0,.5);
+ color: rgba(0,0,0,0);
+ transition: 3s;
 }
 .mutated {
-  background-color:white;
+ background-color: rgba(255,255,255,1);
+ transition: 3s;
+}
+.mutated-active {
+ margin: 8px;
+ padding: 2px;
+ transition: 3s;
+ color: rgba(0,0,0,1);
+ font-size:18px;
 }
 `;
 

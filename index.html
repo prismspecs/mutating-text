@@ -7,18 +7,30 @@
 
 
    <style>
-   @keyframes example {
-      from {background-color: inherit;}
-      to {background-color: black;}
+
+    .blackout {
+      background-color: rgba(255,255,255,1);
+      transition: 3s;
     }
-   .blackout {
-     background-color:#000;
-     animation-name: example;
-     animation-duration: 4s;
+   .blackout-active {
+     background-color: rgba(0,0,0,.5);
+     color: rgba(0,0,0,0);
+     transition: 3s;
    }
    .mutated {
-     background-color:white;
+     background-color: rgba(255,255,255,1);
+     transition: 3s;
    }
+   .mutated-active {
+     margin: 8px;
+     padding: 2px;
+     transition: 3s;
+     color: rgba(0,0,0,1);
+     font-size:18px;
+   }
+
+
+
    </style>
 
 </head>
@@ -59,15 +71,15 @@
         <p>The thematic focus group »Mutations« is a cooperation between the Akademie Schloss Solitude, and the <a href="https://www.kfw-stiftung.de/kunst-kultur/mutationen-interdisziplinaeres-residenzprogramm">KfW Stiftung</a>, an independent
           non-profit foundation which focuses on intercultural dialogue and artistic production in the global context. This marks the first time in its history that the Akademie Schloss Solitude has expanded its profile with a content-related
           program. Both locally and digitally, international artists and creative thinkers have been engaging with the topic of »Mutations« since October 2020 through immersive group labs:</p>
-        <p>To define the <strong>mutational</strong> is, at its most basic, to set apart a condition at odds with an established order. In the life sciences, this translates to alterations in chromosomal sequence, molecular transformations in cells,
-          tissues, and organisms that are tracked within empirical con<strong>text</strong>s construed by <strong>modern science</strong>. Yet embedded in the idea of mutation are <strong>blind</strong> spots underp<strong>in</strong>ning<strong>
-            the</strong> designation of order itself. This is true not only in conceptual terms, disciplinary methodologies, or institutional priorities, but also through socio-political configurations that frame what is deemed disparate or
-          exceptional in the<strong> first</strong> <strong>place.</strong></p>
-        <p>The thematic <strong>focus</strong> group »Mutations« at Akademie Schloss Solitude is comprised of seven fellows representing a variety of artistic and interdisciplinary backgrounds. The group is marked by intersecting interests that
-          expand mutation <strong>beyond</strong> bounded interpretations of bio<strong>logical</strong> structures and <strong>systems.</strong> Be it in the worsening eco<strong>logical</strong> <strong>crisis</strong>, the systematic persistence
-          of capitalist and post-colonial structural violence, or the on<strong>going</strong> waves of a <strong>viral</strong> pandemic, the urgency of reevaluating mutations serves as <strong>a</strong> homing de<strong>vice.</strong> Over the
-          course of nine months, the »Mutations« fellows will eng<strong>a</strong>ge in discussions and reflection on the <strong>critical potential </strong>of mutations for <strong>rethink</strong>ing and reclaiming integrative
-          <strong>concept</strong>ions <strong>of life</strong> and livelihood, where the individual connotations of the term converge with its planetary implications.</p>
+        <p>To define the mutational is, at its most basic, to set apart a condition at odds with an established order. In the life sciences, this translates to alterations in chromosomal sequence, molecular transformations in cells,
+          tissues, and organisms that are tracked within empirical contexts construed by modern science. Yet embedded in the idea of mutation are blind spots underpinning
+            the designation of order itself. This is true not only in conceptual terms, disciplinary methodologies, or institutional priorities, but also through socio-political configurations that frame what is deemed disparate or
+          exceptional in the first place.</p>
+        <p>The thematic focus group »Mutations« at Akademie Schloss Solitude is comprised of seven fellows representing a variety of artistic and interdisciplinary backgrounds. The group is marked by intersecting interests that
+          expand mutation beyond bounded interpretations of biological structures and systems. Be it in the worsening ecological crisis, the systematic persistence
+          of capitalist and post-colonial structural violence, or the ongoing waves of a viral pandemic, the urgency of reevaluating mutations serves as a homing device. Over the
+          course of nine months, the »Mutations« fellows will engage in discussions and reflection on the critical potential of mutations for rethinking and reclaiming integrative
+          conceptions of life and livelihood, where the individual connotations of the term converge with its planetary implications.</p>
         <p>&nbsp;</p>
       </div>
 <script src="mutate.js"></script>
