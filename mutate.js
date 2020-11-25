@@ -1,9 +1,3 @@
-// var word = 'mutat';
-// var template = '$1<span class="blackout">$2</span>$3';
-// var pattern = new RegExp('(>[^<.]*)(' + word + ')([^<.]*)', "ig");
-// var content = $('.content').html();
-// $('.content').html(content.replace(pattern, template));
-
 var words = ["mutational", "text", "modern", "science", "blind", "in", "the", "first", "place", "focus", "beyond", "logical", "systems", "logical", "crisis", "going", "viral", "a", "vice", "a", "critical", "potential", "rethink", "concept", "of", "life"];
 
 var MutationActive = false;
@@ -34,7 +28,13 @@ function PrepText(divClass, wordList) {
 
 			// add mutated class
 			var output = spans[i].innerHTML;
-			var replaced = "</span><span class='mutated'>" + words[wordSearchIndex] + "</span><span class='blackout'>";
+
+			// quick hack to add colon after 'mutational text:'
+			if (words[wordSearchIndex] == "text") {
+				var replaced = "<span class='mutated addcolon'>" + words[wordSearchIndex] + "</span>";
+			} else {
+				var replaced = "<span class='mutated'>" + words[wordSearchIndex] + "</span>";
+			}
 
 			output = output.replace(words[wordSearchIndex], replaced);
 
@@ -66,7 +66,7 @@ function ActivateText() {
 	}
 
 	var mutations = document.getElementsByClassName("mutated");
-	for (var i = 0; i < blackouts.length; i++) {
+	for (var i = 0; i < mutations.length; i++) {
 		mutations[i].classList.add("mutated-active");
 	}
 }
@@ -78,27 +78,11 @@ function DeactivateText() {
 	}
 
 	var mutations = document.getElementsByClassName("mutated");
-	for (var i = 0; i < blackouts.length; i++) {
+	for (var i = 0; i < mutations.length; i++) {
 		mutations[i].classList.remove("mutated-active");
 	}
 }
 
-function AddLink() {
-	var spans = document.getElementsByClassName("blackout");
-	for (var i = 0; i < spans.length; i++) {
-
-		var n = spans[i].innerHTML.search("transcend");
-
-		// if we found a match
-		if (n > -1) {
-
-			// link
-			var output = spans[i].innerHTML;
-			output = output.replace("transcend", '<a id="myLink" href="#" onclick="ActivateText();return false;">transcend</a>');
-			spans[i].innerHTML = output;
-		}
-	}
-}
 
 // add event listeners
 // so that when you click on content divs it switches effect on/off
@@ -126,6 +110,7 @@ var styles = `
 }
 .mutated {
  background-color: rgba(255,255,255,1);
+ color: rgba(0,0,0,1);
  transition: 3s;
 }
 .mutated-active {
@@ -133,7 +118,9 @@ var styles = `
  padding: 2px;
  transition: 3s;
  color: rgba(0,0,0,1);
- font-size:18px;
+}
+.mutated-active.addcolon:after {
+ content: ":";
 }
 `;
 
