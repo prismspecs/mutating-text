@@ -18,13 +18,13 @@ function PrepText(divClass, wordList) {
 	var spans = document.getElementsByClassName("blackout");
 	// better to move backward thru array bc i'll be removing classes
 	for (var i = spans.length - 1; i >= 0; i--) {
-		console.log("looking for " + words[wordSearchIndex] + " in " + spans[i].innerHTML);
+		//console.log("looking for " + words[wordSearchIndex] + " in " + spans[i].innerHTML);
 		var n = spans[i].innerHTML.search(words[wordSearchIndex]);
 
 		// if we found a match
 		if (n > -1 && wordSearchIndex >= 0) {
 
-			console.log("found match for " + words[wordSearchIndex]);
+			//console.log("found match for " + words[wordSearchIndex]);
 
 			// add mutated class
 			var output = spans[i].innerHTML;
@@ -42,7 +42,7 @@ function PrepText(divClass, wordList) {
 
 			// remove blackout class
 			// spans[i].classList.remove("blackout");
-			console.log(spans[i].classList);
+			//console.log(spans[i].classList);
 
 			wordSearchIndex--;
 		}
