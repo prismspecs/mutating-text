@@ -103,6 +103,9 @@ var styles = `
   background-color: rgba(255,255,255,1);
   transition: 3s;
 }
+a .blackout {
+  background-color: transparent;
+}
 .blackout-active {
  background-color: rgba(0,0,0,.5);
  color: rgba(0,0,0,0);
